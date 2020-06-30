@@ -5,14 +5,19 @@
         <hr class="my-4">
         <p>Put in your <a rel="noreferrer nofollow noopener" href="https://steamcommunity.com/dev/apikey">Steam API
                 key</a> in order to generate a proof of trade.</p>
-        <div class="input-group mb-3">
+        <!-- <div class="input-group mb-3">
             <div class="input-group-prepend">
                 <span class="input-group-text" id="basic-addon1">Steam API key</span>
             </div>
             <input [(ngModel)]="userkey" type="text" class="form-control" placeholder="Your api key here" aria-label="ApiKey"
                 aria-describedby="basic-addon1">
         </div>
-        <button type="button" class="btn btn-primary" (click)="get()">Get trades</button>
+        <button type="button" class="btn btn-primary" (click)="get()">Get trades</button> -->
+        <div class="key-area">
+            <div class="label">Steam API key</div>
+            <input [(ngModel)]="userkey" type="text" class="key-field" placeholder="Your API key here">
+            <button type="button" class="get-button" (click)="get()">Get trades</button>
+        </div>
     </div>
     
     <div *ngIf="tradeproof" class="alert alert-success proof" role="alert">
