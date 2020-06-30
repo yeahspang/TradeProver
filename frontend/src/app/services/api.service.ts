@@ -28,4 +28,11 @@ export class ApiService {
 
     return this.http.post<Trade[]>(this.apiUrl + "/trades/table", contents);
   }
+
+  public getProof(code : string) : Observable<Trade> {
+    const contents = {
+      encryptedCode: code
+    }  
+    return this.http.post<Trade>(this.apiUrl + "/trades/verify", contents);
+  }
 }
