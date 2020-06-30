@@ -1,0 +1,4 @@
+{
+    "EncryptionKey": "<ENCRYPTION_KEY>",
+    "IntializationVector": "<IV>"
+}
