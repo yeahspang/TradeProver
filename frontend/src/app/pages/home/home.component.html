@@ -16,9 +16,11 @@
     </div>
     
     <div *ngIf="tradeproof" class="alert alert-success proof" role="alert">
-        Proof: {{tradeproof}}
+        Proof
+        <hr/>
+        {{tradeproof}}
     </div>
-    <div *ngIf="tradeproof" class="alert alert-danger" role="alert">
+    <div *ngIf="tradeproof" class="alert alert-warning" role="alert">
         It is recommended to revoke your API key after generating proof. This can be done <a rel="noreferrer nofollow noopener" href="https://steamcommunity.com/dev/apikey">here</a>.
     </div>
     <table *ngIf="trades" class="table table-dark">
