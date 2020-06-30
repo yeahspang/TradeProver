@@ -5,7 +5,11 @@ const bodyParser = require("body-parser");
 const Trade = require("./trade");
 const ProofGenerator = require("./proofgenerator");
 const cors = require('cors');
-const proofGenerator = new ProofGenerator();
+const config = require('./config.json');
+
+
+const proofGenerator = new ProofGenerator(config.EncryptionKey, config.IntializationVector);
+
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
