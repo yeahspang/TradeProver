@@ -15,7 +15,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
 const corsOptions = {
-    origin: "http://localhost:4200"
+    origin: "http://localhost:3400"
 }
 app.use(cors(corsOptions));
 
@@ -77,6 +77,8 @@ app.post('/trades/table', (req, res, next) => {
         let index = 1;
         for (const trade of successfulTrades) {
             var assets = [];
+            console.log(trade);
+            if(!trade.assets_given) continue;
             for (const asset of trade.assets_given) {
                 assets.push({
                     appId: asset.appid,
