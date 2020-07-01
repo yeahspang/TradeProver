@@ -42,15 +42,17 @@ app.post('/trades/proof', (req, res, next) => {
         }
         const response = JSON.parse(body);
         const allTrades = response.response.trades;
-        var successfulTrades = allTrades.filter(trade => trade.status == 3);
+        var successfulTrades = allTrades.filter(trade => trade.status == 3 && trade.assets_given != null);
 
         var trade = successfulTrades[tradeId - 1]
         var assets = [];
-        for (const asset of trade.assets_given) {
-            assets.push({
-                appId: asset.appid,
-                assetId: asset.assetid
-            });
+        if(trade.assets_given != null) {
+            for (const asset of trade.assets_given) {
+                assets.push({
+                    appId: asset.appid,
+                    assetId: asset.assetid
+                });
+            }
         }
         let minifiedTrade = new Trade(tradeId, trade.steamid_other, assets);
         var proof = proofGenerator.Encrypt(JSON.stringify(minifiedTrade));
@@ -72,13 +74,12 @@ app.post('/trades/table', (req, res, next) => {
 
         const response = JSON.parse(body);
         const allTrades = response.response.trades;
-        var successfulTrades = allTrades.filter(trade => trade.status == 3);
+        var successfulTrades = allTrades.filter(trade => trade.status == 3 && trade.assets_given != null);
 
         let index = 1;
         for (const trade of successfulTrades) {
             var assets = [];
             console.log(trade);
-            if(!trade.assets_given) continue;
             for (const asset of trade.assets_given) {
                 assets.push({
                     appId: asset.appid,
