@@ -3,7 +3,7 @@
 @accent: #abd3d6;
 
 html, body { height: 100%; }
-body { margin: 0; font-family: Work Sans; }
+body { margin: 0; font-family: 'Noto Sans JP', sans-serif; }
 
 
 html, body {
@@ -37,4 +37,37 @@ html, body {
 .title {
     font-weight: 600;
     letter-spacing: 2px;
+}
+
+.input-area {
+    position: relative;
+    margin-top: 30px;
+    .input-field {
+        background: #232728;
+        border: 1px solid @accent;
+        padding: 0.6rem 1rem;
+        border-radius: 8px;
+    }
+    
+    
+    .label {
+        position: absolute;
+        left: 0.5rem;
+        top: -8px;
+        line-height: 16px;
+        font-size: 13px;
+        color: #abd3d6;
+        background: #232728 ;
+        padding: 0 0.5rem;
+    }
+}
+.input-button {
+    padding: 0.6rem 1rem;
+    background: #232728;
+    border: 1px solid @accent;
+    border-radius: 8px;
+
+    &:hover {
+        background-color: rgba(255, 255, 255, 0.1);
+    }
 }
