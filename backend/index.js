@@ -76,21 +76,43 @@ app.post('/trades/table', (req, res, next) => {
         const allTrades = response.response.trades;
         var successfulTrades = allTrades.filter(trade => trade.status == 3 && trade.assets_given != null);
 
-        let index = 1;
-        for (const trade of successfulTrades) {
-            var assets = [];
-            console.log(trade);
-            for (const asset of trade.assets_given) {
-                assets.push({
-                    appId: asset.appid,
-                    assetId: asset.assetid
-                });
+
+        var steamids = successfulTrades.map((value) => value.steamid_other).filter((value, index, self) => self.indexOf(value) === index);
+
+        //Get the steam player summaries
+
+        request({
+            uri: `https://api.steampowered.com/ISteamUser/GetPlayerSummaries/v2/?key=${apikey}&steamids=${steamids.join(",")}`,
+            method: "GET"
+        }, function(err, resp, body) {
+            if(err) {
+                console.log(err);
             }
-            let minifiedTrade = new Trade(index, trade.steamid_other, assets);
-            minifiedTrades.push(minifiedTrade);
-            index++;
-        }
-        res.send(minifiedTrades);
+
+            body = JSON.parse(body);
+            var players = body.response.players;
+
+
+            let index = 1;
+            for (const trade of successfulTrades) {
+                var assets = [];
+                for (const asset of trade.assets_given) {
+                    assets.push({
+                        appId: asset.appid,
+                        assetId: asset.assetid
+                    });
+                }
+                let minifiedTrade = new Trade(index, trade.steamid_other, assets, players.filter((value) => value.steamid == trade.steamid_other)[0].personaname);
+                console.log(minifiedTrade);
+                minifiedTrades.push(minifiedTrade);
+                index++;
+            }
+            res.send(minifiedTrades);
+
+        });
+
+
+
     });
 });
 

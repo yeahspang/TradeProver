@@ -4,4 +4,5 @@ export class Trade {
     id: number;
     steamid_other: number;
     assetIds: Asset[];
+    otherPersonaName: string;
 }

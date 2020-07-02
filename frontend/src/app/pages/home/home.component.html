@@ -30,28 +30,31 @@
         It is recommended to revoke your API key after generating proof. This can be done <a
             rel="noreferrer nofollow noopener" href="https://steamcommunity.com/dev/apikey">here</a>.
     </div>
-    <table *ngIf="trades" class="table table-dark">
-        <thead>
-            <tr>
-                <th scope="col">Trader</th>
-                <th scope="col">Receiver</th>
-                <th scope="col">Items</th>
-                <th scope="col"></th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr *ngFor="let trade of trades">
-                <td>You</td>
-                <td>{{ trade.steamid_other }}</td>
-                <td>
-                    <p *ngFor="let asset of trade.assetIds">{{ asset.assetId }}</p>
-                </td>
-                <td>
-                    <button type="button" class="input-button" (click)="proof(trade.id)">Generate proof</button>
-                </td>
-            </tr>
-        </tbody>
-    </table>
+    <div *ngIf="trades">
+        <p>Then, select the trade you'd like to verify:</p>
+        <table  class="table table-dark">
+            <thead>
+                <tr>
+                    <th scope="col">Trader</th>
+                    <th scope="col">Receiver</th>
+                    <th scope="col">Items</th>
+                    <th scope="col"></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let trade of trades">
+                    <td>You</td>
+                    <td>{{ trade.otherPersonaName }}</td>
+                    <td>
+                        <p *ngFor="let asset of trade.assetIds">{{ asset.assetId }}</p>
+                    </td>
+                    <td>
+                        <button type="button" class="input-button" (click)="proof(trade.id)">Generate proof</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
 
     <div class="row">
         <div class="col-sm">
@@ -60,8 +63,7 @@
                     How does it work?
                 </div>
                 <div class="card-body">
-                    <p>This service will help you proof that you've traded an item <b>without</b> losing control of your
-                        API key.</p>
+                    <p>This service will generate undisputable evidence for a given Steam trade.</p>
                     <p>The system works by using symmetrical encryption. The system asks for your trade history at Steam
                         using your API key, and encrypts the chosen trade with a key.
                         This key is unknown to other parties, and cannot be faked. We send you the encrypted text which
