@@ -1,6 +1,6 @@
 /* You can add global styles to this file, and also import other style files */
 
-@accent: #007bff;
+@accent: #3d8ce0;
 
 html, body { height: 100%; }
 body { margin: 0; font-family: 'Noto Sans JP', sans-serif; }
@@ -68,12 +68,14 @@ html, body {
 }
 .input-button {
     padding: 0.6rem 1rem;
-    background: #232728;
-    border: 1px solid @accent;
+    background: @accent;
+    border: 1px solid #0000;
     border-radius: 8px;
+    
 
     &:hover {
-        background-color: rgba(255, 255, 255, 0.1);
+        background-color: @accent;
+        opacity: 80%;
     }
 }
 .footer {
