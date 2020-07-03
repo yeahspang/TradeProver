@@ -1,10 +1,14 @@
 /* You can add global styles to this file, and also import other style files */
 
-@accent: #abd3d6;
+@accent: #007bff;
 
 html, body { height: 100%; }
 body { margin: 0; font-family: 'Noto Sans JP', sans-serif; }
 
+main {
+    position: relative;
+    min-height: 100vh;
+  }
 
 html, body {
     background-color: #1d2021;
@@ -16,7 +20,7 @@ html, body {
     border: 1px solid @accent;
 }
 .card-header {
-    color: #232728;
+    color: #fff;
     background-color: @accent;
     padding: 0.7rem 1.6rem;
 }
@@ -43,6 +47,7 @@ html, body {
     position: relative;
     margin-top: 30px;
     .input-field {
+        color: #fff;
         background: #232728;
         border: 1px solid @accent;
         padding: 0.6rem 1rem;
@@ -56,7 +61,7 @@ html, body {
         top: -8px;
         line-height: 16px;
         font-size: 13px;
-        color: #abd3d6;
+        color: @accent;
         background: #232728 ;
         padding: 0 0.5rem;
     }
@@ -69,5 +74,15 @@ html, body {
 
     &:hover {
         background-color: rgba(255, 255, 255, 0.1);
+    }
+}
+.footer {
+    width: 100%;
+    height: 60px;
+    line-height: 60px;
+    background-color: #232728;
+    .container {
+        display: flex;
+        justify-content: space-between;
     }
 }

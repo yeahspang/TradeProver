@@ -3,8 +3,9 @@
         <h1 class="display-4 title">Proof Steam Trades</h1>
         <p class="lead">Verify trades without losing control of your API key</p>
         <hr class="my-4">
-        <p>Put in your <a rel="noreferrer nofollow noopener" href="https://steamcommunity.com/dev/apikey">Steam API
+        <p>Put in your <a rel="noreferrer nofollow noopener" target="_blank" href="https://steamcommunity.com/dev/apikey">Steam API
                 key</a> in order to generate a proof of trade.</p>
+        <p>For the "domain name" field, you can put in tradeprover.com</p>
         <!-- <div class="input-group mb-3">
             <div class="input-group-prepend">
                 <span class="input-group-text" id="basic-addon1">Steam API key</span>
@@ -17,8 +18,9 @@
             <div class="label">Steam API key</div>
             <input [(ngModel)]="userkey" type="text" class="input-field" (keyup.enter)="get()"
                 placeholder="Your API key here">
-            <button type="button" class="input-button" (click)="get()">Get trades</button>
         </div>
+        <br/>
+        <button type="button" class="btn btn-primary" (click)="get()">Get trades</button>
     </div>
 
     <div *ngIf="tradeproof" class="alert alert-success proof" role="alert">
