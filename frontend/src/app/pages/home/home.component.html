@@ -6,20 +6,12 @@
         <p>Put in your <a rel="noreferrer nofollow noopener" target="_blank" href="https://steamcommunity.com/dev/apikey">Steam API
                 key</a> in order to generate a proof of trade.</p>
         <p>For the "domain name" field, you can put in tradeprover.com</p>
-        <!-- <div class="input-group mb-3">
-            <div class="input-group-prepend">
-                <span class="input-group-text" id="basic-addon1">Steam API key</span>
-            </div>
-            <input [(ngModel)]="userkey" type="text" class="form-control" placeholder="Your api key here" aria-label="ApiKey"
-                aria-describedby="basic-addon1">
-        </div>
-        <button type="button" class="btn btn-primary" (click)="get()">Get trades</button> -->
         <div class="input-area">
             <div class="label">Steam API key</div>
             <input [(ngModel)]="userkey" type="text" class="input-field" (keyup.enter)="get()"
                 placeholder="Your API key here">
         </div>
-        <br/>
+        
         <button type="button" class="input-button" (click)="get()">Get trades</button>
     </div>
 
@@ -32,8 +24,14 @@
         It is recommended to revoke your API key after generating proof. This can be done <a
             rel="noreferrer nofollow noopener" href="https://steamcommunity.com/dev/apikey">here</a>.
     </div>
-    <div *ngIf="trades">
-        <p>Then, select the trade you'd like to verify:</p>
+    <div *ngIf="trades" class="jumbotron-small">
+        <!-- <p>Then, select the trade you'd like to verify:</p> -->
+        <h2>Get proof</h2>
+        <div class="input-area">
+            <div class="label">Look for your asset ID (optional)</div>
+            <input [(ngModel)]="assetIdToProof" type="text" class="input-field" (keyup.enter)="get()"
+                placeholder="Asset ID">
+        </div>
         <table  class="table table-dark">
             <thead>
                 <tr>
@@ -43,11 +41,11 @@
                     <th scope="col"></th>
                 </tr>
             </thead>
-            <tbody>
-                <tr *ngFor="let trade of trades">
+            <tbody >
+                <tr *ngFor="let trade of trades" [className] = "checkId(trade.assetIds) ? 'asset-found' : ''">
                     <td>You</td>
                     <td>{{ trade.otherPersonaName }}</td>
-                    <td>
+                    <td >
                         <p *ngFor="let asset of trade.assetIds">{{ asset.assetId }}</p>
                     </td>
                     <td>

@@ -9,7 +9,9 @@ main {
     position: relative;
     min-height: 100vh;
   }
-
+h2 {
+    font-weight: 600;
+}
 html, body {
     background-color: #1d2021;
 }
@@ -29,6 +31,13 @@ html, body {
 }
 .jumbotron {
     background-color: #232728;
+    margin-bottom: 55px;
+}
+.jumbotron-small {
+    background-color: #232728;
+    margin-bottom: 55px;
+    padding: 1.6rem;
+    border-radius: 0.3rem;
 }
 * {
     color: #fff;
@@ -45,10 +54,10 @@ html, body {
 
 .input-area {
     position: relative;
-    margin-top: 30px;
+    margin: 30px 0;
     .input-field {
         color: #fff;
-        background: #232728;
+        background: inherit;
         border: 1px solid @accent;
         padding: 0.6rem 1rem;
         border-radius: 8px;
@@ -87,4 +96,5 @@ html, body {
         display: flex;
         justify-content: space-between;
     }
+    margin-top: 60px;
 }
