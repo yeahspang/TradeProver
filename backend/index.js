@@ -19,17 +19,17 @@ const corsOptions = {
 }
 app.use(cors(corsOptions));
 
-app.listen(3000, () => {
- console.log("Server running on port 3000");
+app.listen(8080, () => {
+ console.log("Server running on port 8080");
 });
 
-app.post('/trades/verify', (req, res) => {
+app.post('/api/trades/verify', (req, res) => {
     var encryptedCode = req.body.encryptedCode;
     const trade = proofGenerator.Decrypt(encryptedCode);
     res.send(trade);
 })
 
-app.post('/trades/proof', (req, res, next) => {
+app.post('/api/trades/proof', (req, res, next) => {
     var apikey = req.body.ApiKey;
     var tradeId = req.body.TradeId;
 
@@ -60,7 +60,7 @@ app.post('/trades/proof', (req, res, next) => {
     });
 });
 
-app.post('/trades/table', (req, res, next) => {
+app.post('/api/trades/table', (req, res, next) => {
     var apikey = req.body.ApiKey;
     request({
         uri: `https://api.steampowered.com/IEconService/GetTradeHistory/v1/?key=${apikey}&max_trades=10`,
@@ -110,13 +110,6 @@ app.post('/trades/table', (req, res, next) => {
             res.send(minifiedTrades);
 
         });
-
-
-
     });
 });
 
-//const input = "4b24680e9ba2f6299e0b6ceb510b87c605c19389b3d2287fbe3a05c474b61f0c5baebd79c9bfe70dfd4465d291527a0cc87cf1b5eca13b3451b18f8be0d1e3c79694279f0807ed93047f58fa7f66073c25ad97a2ab550385d948a913affecd1b";
-//console.log(proofGenerator.Decrypt(input));
-
-// var proof = proofGenerator.Encrypt(JSON.stringify(minifiedTrades));
