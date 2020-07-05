@@ -26,10 +26,10 @@
     </div>
     <div *ngIf="trades" class="jumbotron-small">
         <!-- <p>Then, select the trade you'd like to verify:</p> -->
-        <h2>Get proof</h2>
+        <h2>Generate proof</h2>
         <div class="input-area">
-            <div class="label">Look for your asset ID (optional)</div>
-            <input [(ngModel)]="assetIdToProof" type="text" class="input-field" (keyup.enter)="get()"
+            <div class="label">Find trade by Asset ID (optional)</div>
+            <input [(ngModel)]="assetIdToProve" type="text" class="input-field" (keyup.enter)="get()"
                 placeholder="Asset ID">
         </div>
         <table  class="table table-dark">

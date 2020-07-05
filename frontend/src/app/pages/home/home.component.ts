@@ -15,7 +15,7 @@ export class HomeComponent implements OnInit {
   trades: Trade[];
   tradeproof: string;
   public userkey: string;
-  public assetIdToProof: number;
+  public assetIdToProve: string = "";
   constructor(private api: ApiService) { }
 
   ngOnInit() {
@@ -29,8 +29,11 @@ export class HomeComponent implements OnInit {
 
   checkId(assets : Asset[]) : boolean {
     //return assets[0].assetId.valueOf().toString();
+    if(this.assetIdToProve.length == 0) {
+      return false;
+    }
     for(let a of assets) {
-      if(a.assetId == this.assetIdToProof) {
+      if(a.assetId.toString().includes(this.assetIdToProve.toString())) {
         return true;  
       }
     }
