@@ -28,7 +28,6 @@ export class HomeComponent implements OnInit {
   }
 
   checkId(assets : Asset[]) : boolean {
-    //return assets[0].assetId.valueOf().toString();
     if(this.assetIdToProve.length == 0) {
       return false;
     }
