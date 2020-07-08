@@ -3,7 +3,8 @@
         <h1 class="display-4 title">Proof Steam Trades</h1>
         <p class="lead">Verify trades without losing control of your API key</p>
         <hr class="my-4">
-        <p>Put in your <a rel="noreferrer nofollow noopener" target="_blank" href="https://steamcommunity.com/dev/apikey">Steam API
+        <p>Put in your <a rel="noreferrer nofollow noopener" target="_blank"
+                href="https://steamcommunity.com/dev/apikey">Steam API
                 key</a> in order to generate a proof of trade.</p>
         <p>For the "domain name" field, you can put in tradeprover.com</p>
         <div class="input-area">
@@ -11,7 +12,7 @@
             <input [(ngModel)]="userkey" type="text" class="input-field" (keyup.enter)="get()"
                 placeholder="Your API key here">
         </div>
-        
+
         <button type="button" class="input-button" (click)="get()">Get trades</button>
     </div>
 
@@ -24,15 +25,15 @@
         It is recommended to revoke your API key after generating proof. This can be done <a
             rel="noreferrer nofollow noopener" href="https://steamcommunity.com/dev/apikey">here</a>.
     </div>
-    <div *ngIf="trades" class="jumbotron-small">
+    <div *ngIf="trades" class="">
         <!-- <p>Then, select the trade you'd like to verify:</p> -->
         <h2>Generate proof</h2>
         <div class="input-area">
-            <div class="label">Find trade by Asset ID (optional)</div>
+            <div class="label dark">Find trade by Asset ID (optional)</div>
             <input [(ngModel)]="assetIdToProve" type="text" class="input-field" (keyup.enter)="get()"
                 placeholder="Asset ID">
         </div>
-        <table  class="table table-dark">
+        <table class="table table-dark">
             <thead>
                 <tr>
                     <th scope="col">Trader</th>
@@ -41,12 +42,22 @@
                     <th scope="col"></th>
                 </tr>
             </thead>
-            <tbody >
-                <tr *ngFor="let trade of trades" [className] = "checkId(trade.assetIds) ? 'asset-found' : ''">
+            <tbody>
+                <tr *ngFor="let trade of trades" [className]="checkId(trade.assetIds) ? 'asset-found' : ''">
                     <td>You</td>
                     <td>{{ trade.otherPersonaName }}</td>
-                    <td >
-                        <p *ngFor="let asset of trade.assetIds">{{ asset.assetId }}</p>
+                    <td>
+                        <div class="asset-container" *ngFor="let asset of trade.assetIds">
+                            <p>{{ asset.assetId }} </p>
+                            
+                            <div class="desc">
+                                <p style="color: {{asset.description.color}}">{{asset.description.name}}</p>
+                                <hr>
+                                <img src="http://cdn.steamcommunity.com/economy/image/{{asset.description.img}}" />
+
+                            </div>
+                        </div>
+
                     </td>
                     <td>
                         <button type="button" class="input-button" (click)="proof(trade.id)">Generate proof</button>
@@ -81,7 +92,8 @@
                 <div class="card-body">
                     <p>A screenshot of a trade is easily fakeable. Tech savvy people can easily edit the screenshot to
                         make it look like the trade happened, while it did not.</p>
-                    <p>The system is fully <a rel="noreferrer nofollow noopener" href="https://github.com/yeahspang/tradeprover">open
+                    <p>The system is fully <a rel="noreferrer nofollow noopener"
+                            href="https://github.com/yeahspang/tradeprover">open
                             source</a>, and will not save your API key or any other information personal information.
                     </p>
                 </div>
