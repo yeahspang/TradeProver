@@ -47,14 +47,14 @@
                     <td>You</td>
                     <td>{{ trade.otherPersonaName }}</td>
                     <td>
+
                         <div class="asset-container" *ngFor="let asset of trade.assetIds">
-                            <p>{{ asset.assetId }} </p>
                             
                             <div class="desc">
-                            <p>{{asset.description.name}}</p>
+                                <p>id: {{asset.assetId}}</p>
+                                <p>{{asset.description.name}}</p>
                                 <hr>
-                                <img src="http://cdn.steamcommunity.com/economy/image/{{asset.description.img}}" />
-
+                                <img src="https://steamcommunity-a.akamaihd.net/economy/image/{{asset.description.img}}" />
                             </div>
                         </div>
 

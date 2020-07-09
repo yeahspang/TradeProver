@@ -48,6 +48,12 @@ table {
 
         .asset-found {
             background-color: #fff5;
+            .asset-container {
+                .desc {
+                    background-color: #fff5;
+
+                }
+            }
         }
 
         tr {
@@ -85,18 +91,7 @@ tr {
     td {
         .asset-container {
             position: relative;
-
-            p {}
-
-            &:hover {
-                .desc {
-                    display        : flex;
-                    justify-content: center;
-                    align-items    : center;
-                    z-index        : 10;
-                    flex-direction: column;
-                }
-            }
+            margin-top: 10px;
 
             .desc {
                 // height          : 140px;
@@ -104,15 +99,11 @@ tr {
                 padding         : 15px 20px;
                 background-color: #232728;
                 border-radius: 4px;
-                position        : absolute;
-                top             : 0;
                 overflow        : visible;
-                left            : 40%;
-                display         : flex;
-                align-items     : center;
-                justify-content : center;
-                display         : none;
-
+                display        : flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items    : center;
                 img {
                     height: 100px;
                 }
