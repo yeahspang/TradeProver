@@ -42,6 +42,11 @@ app.post('/api/trades/proof', (req, res, next) => {
         if (err) {
             console.log(err);
         }
+        if(resp.statusCode != 200) {
+            res.status(403);
+            res.send({error: "Could not satisfy that request with this API key"});
+            return;
+        }
         const response = JSON.parse(body);
         const allTrades = response.response.trades;
         var successfulTrades = allTrades.filter(trade => trade.status == 3 && trade.assets_given != null);
@@ -59,6 +64,9 @@ app.post('/api/trades/proof', (req, res, next) => {
         let minifiedTrade = new Trade(tradeId, trade.steamid_other, assets);
         var proof = proofGenerator.Encrypt(JSON.stringify(minifiedTrade));
         res.send({ proof: proof });
+        
+        
+        
     });
 });
 
@@ -71,7 +79,11 @@ app.post('/api/trades/table', (req, res, next) => {
         if (err) {
             console.log(err);
         }
-
+        if(resp.statusCode != 200) {
+            res.status(403);
+            res.send({error: "Could not satisfy that request with this API key"});
+            return;
+        }
         var minifiedTrades = [];
 
         const response = JSON.parse(body);
@@ -96,6 +108,11 @@ app.post('/api/trades/table', (req, res, next) => {
         }, function (err, resp, body) {
             if (err) {
                 console.log(err);
+            }
+            if(resp.statusCode != 200) {
+                res.status(403);
+                res.send({error: "Could not satisfy that request with this API key"});
+                return;
             }
 
             body = JSON.parse(body);
@@ -122,12 +139,10 @@ app.post('/api/trades/table', (req, res, next) => {
 
                 }
                 let minifiedTrade = new Trade(index, trade.steamid_other, assets, players.filter((value) => value.steamid == trade.steamid_other)[0].personaname);
-                console.log(minifiedTrade);
                 minifiedTrades.push(minifiedTrade);
                 index++;
             }
             res.send(minifiedTrades);
-
         });
     });
 });
