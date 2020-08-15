@@ -20,7 +20,6 @@ export class VerifyComponent implements OnInit {
 
   verify() {
     this.api.getProof(this.code).subscribe((resp: any) => {
-      console.log(resp.status);
         this.decodedTrade = resp;
     }, err => {
       this.invalid = true;

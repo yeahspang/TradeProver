@@ -1,63 +1,71 @@
+<div class="bg"></div>
 <div class="container">
     <div class="jumbotron w-100">
-        <h1 class="display-4 title">Proof Steam Trades</h1>
+        <h1 class="display-4 title">Prove Steam Trades</h1>
         <p class="lead">Verify trades without losing control of your API key</p>
-        <hr class="my-4">
-        <p>Put in your <a rel="noreferrer nofollow noopener" target="_blank"
-                href="https://steamcommunity.com/dev/apikey">Steam API
-                key</a> in order to generate a proof of trade.</p>
-        <p>For the "domain name" field, you can put in tradeprover.com</p>
-        <div class="input-area">
-            <div class="label">Steam API key</div>
-            <input [(ngModel)]="userkey" type="text" class="input-field" (keyup.enter)="get()"
-                placeholder="Your API key here">
-        </div>
+        <div class="form-area">
+            <p>Put in your <a class="link" rel="noreferrer nofollow noopener" target="_blank"
+                    href="https://steamcommunity.com/dev/apikey">Steam API
+                    key</a> in order to generate a proof of trade.</p>
+            <div class="input-area">
+                <label for="apikey" class="label">Steam API key</label>
+                <input [(ngModel)]="userkey" name="apikey" type="text" class="input-field" (keyup.enter)="get()"
+                    placeholder="Your API key here">
+                <button type="button" class="input-button" (click)="get()">Get trades</button>
 
-        <button type="button" class="input-button" (click)="get()">Get trades</button>
+            </div>
+            <p class="small-p">For the "domain name" field, you can put in tradeprover.com</p>
+        </div>
     </div>
 
     <div *ngIf="tradeproof" class="alert alert-success proof" role="alert">
-        Proof
-        <hr />
+        <span class="header">Proof generated! Here is your code:</span>
         {{tradeproof}}
     </div>
     <div *ngIf="tradeproof" class="alert alert-warning" role="alert">
-        It is recommended to revoke your API key after generating proof. This can be done <a
-            rel="noreferrer nofollow noopener" href="https://steamcommunity.com/dev/apikey">here</a>.
+        <span class="header">It is recommended to revoke your API key after generating proof. This can be done <a rel="noreferrer nofollow noopener" class="link" href="https://steamcommunity.com/dev/apikey">here</a>.</span>
     </div>
-    <div *ngIf="trades" class="">
-        <!-- <p>Then, select the trade you'd like to verify:</p> -->
+    <div class="proof-table" *ngIf="trades">
         <h2>Generate proof</h2>
-        <div class="input-area">
+        <!-- <div class="input-area">
             <div class="label dark">Find trade by Asset ID (optional)</div>
             <input [(ngModel)]="assetIdToProve" type="text" class="input-field" (keyup.enter)="get()"
                 placeholder="Asset ID">
-        </div>
+        </div> -->
         <table class="table table-dark">
             <thead>
                 <tr>
+                    <th scope="col">Items</th>
                     <th scope="col">Trader</th>
                     <th scope="col">Receiver</th>
-                    <th scope="col">Items</th>
                     <th scope="col"></th>
                 </tr>
             </thead>
             <tbody>
                 <tr *ngFor="let trade of trades" [className]="checkId(trade.assetIds) ? 'asset-found' : ''">
-                    <td>You</td>
-                    <td>{{ trade.otherPersonaName }}</td>
+                    
                     <td>
-
                         <div class="asset-container" *ngFor="let asset of trade.assetIds">
-                            
+                            <img src="https://steamcommunity-a.akamaihd.net/economy/image/{{asset.description.img}}" />
                             <div class="desc">
-                                <p>id: {{asset.assetId}}</p>
-                                <p>{{asset.description.name}}</p>
-                                <hr>
-                                <img src="https://steamcommunity-a.akamaihd.net/economy/image/{{asset.description.img}}" />
+                                <p class="item-id">id: {{asset.assetId}}</p>
+                                <p class="item-name">{{asset.description.name}}</p>
                             </div>
                         </div>
-
+                    </td>
+                    <td class="trader">
+                        <svg width="26" height="26" viewBox="0 0 26 26" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <circle cx="13" cy="13" r="12" stroke="#7432FF" stroke-width="2"/>
+                        <path fill-rule="evenodd" clip-rule="evenodd" d="M9.10764 12.1395L12.7109 8.53632C12.8544 8.39267 13.0873 8.39267 13.2309 8.53632L16.8342 12.1395C16.906 12.2113 16.9419 12.3053 16.9419 12.3994C16.9419 12.4935 16.906 12.5875 16.8342 12.6594C16.6907 12.803 16.4578 12.803 16.3143 12.6594L13.3387 9.68385V17.2038C13.3387 17.4069 13.174 17.5714 12.971 17.5714C12.768 17.5714 12.6033 17.4068 12.6033 17.2038V9.68382L9.62766 12.6594C9.48414 12.803 9.25128 12.803 9.10764 12.6594C8.96412 12.5157 8.96412 12.2831 9.10764 12.1395Z" fill="#7432FF"/>
+                        </svg>
+                        <span>You</span>
+                    </td>
+                    <td>
+                        <svg width="26" height="26" viewBox="0 0 26 26" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <circle cx="13" cy="13" r="12" transform="rotate(-180 13 13)" stroke="#E0598A" stroke-width="2"/>
+                        <path fill-rule="evenodd" clip-rule="evenodd" d="M16.8924 13.8605L13.2891 17.4637C13.1456 17.6073 12.9127 17.6073 12.7691 17.4637L9.16579 13.8605C9.09397 13.7887 9.05806 13.6947 9.05806 13.6006C9.05806 13.5065 9.09397 13.4125 9.16579 13.3406C9.30931 13.197 9.54217 13.197 9.68569 13.3406L12.6613 16.3161L12.6613 8.79624C12.6613 8.59315 12.826 8.42856 13.029 8.42856C13.232 8.42856 13.3967 8.59317 13.3967 8.79624L13.3967 16.3162L16.3723 13.3406C16.5159 13.197 16.7487 13.197 16.8924 13.3406C17.0359 13.4843 17.0359 13.7169 16.8924 13.8605Z" fill="#E0598A"/>
+                        </svg>                        
+                        <span>{{ trade.otherPersonaName }}</span>
                     </td>
                     <td>
                         <button type="button" class="input-button" (click)="proof(trade.id)">Generate proof</button>
@@ -92,7 +100,7 @@
                 <div class="card-body">
                     <p>A screenshot of a trade is easily fakeable. Tech savvy people can easily edit the screenshot to
                         make it look like the trade happened, while it did not.</p>
-                    <p>The system is fully <a rel="noreferrer nofollow noopener"
+                    <p>The system is fully <a class="link" rel="noreferrer nofollow noopener"
                             href="https://github.com/yeahspang/tradeprover">open
                             source</a>, and will not save your API key or any other information personal information.
                     </p>

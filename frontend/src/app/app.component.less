@@ -1,0 +1,39 @@
+.navbar {
+    margin: 0 auto;
+    width: 1000px;
+    position: relative;
+    z-index: 2
+    ;
+    .nav-container {
+        display: flex;
+        align-items: center;
+
+        height: 80px;
+        .right-align {
+            justify-self: flex-end;
+            margin-left: auto;
+            a {
+                font-family: Work Sans;
+                font-style: normal;
+                font-weight: 600;
+                font-size: 14px;
+                line-height: 16px;
+                padding: 20px;
+                text-transform: uppercase;
+                transition: 0.2s ease-in-out;
+                &:hover {
+                    color: #7432FF;
+                }
+                &.active {
+                    color: #7432FF;
+                }
+            }
+        }
+    }
+}
+:host {
+    height: fit-content;
+    min-height: 100vh;
+    display: block;
+    position: relative;
+}
